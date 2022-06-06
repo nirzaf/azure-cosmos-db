@@ -1,0 +1,21 @@
+﻿-----------------------------------
+-- Aggregate functions (mystore) --
+-----------------------------------
+
+-- Count for zip code
+SELECT COUNT(c) AS Zip14111
+FROM c
+WHERE
+ c.address.postalCode = '14111'
+
+-- Can't count across partitions without VALUE
+SELECT COUNT(c) AS USCount
+FROM c
+WHERE
+ c.address.countryRegionName = 'United States'
+
+-- Use VALUE for cross partition aggregates
+SELECT VALUE COUNT(c)
+FROM c
+WHERE
+ c.address.countryRegionName = 'United States'

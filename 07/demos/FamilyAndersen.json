@@ -1,0 +1,37 @@
+{
+	"id": "AndersenFamily",
+	"lastName": "Andersen",
+	"parents": [
+		{
+			"firstName": "Thomas",
+			"relationship": "father"
+		},
+		{
+			"firstName": "Mary Kay",
+			"relationship": "mother"
+		}
+	],
+	"children": [
+		{
+			"firstName": "Henriette Thaulow",
+			"gender": "female",
+			"grade": 5,
+			"pets": [
+				{
+					"givenName": "Fluffy",
+					"type": "Rabbit"
+				}
+			]
+		}
+	],
+	"location": {
+		"state": "WA",
+		"county": "King",
+		"city": "Seattle"
+	},
+	"geo": {
+		"type": "Point",
+		"coordinates": [ -122.3295, 47.60357 ]
+	},
+	"isRegistered": true
+}

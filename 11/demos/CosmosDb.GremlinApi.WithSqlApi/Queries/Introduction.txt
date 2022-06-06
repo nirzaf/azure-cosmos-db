@@ -1,0 +1,18 @@
+﻿// Create vertices
+g.addV('person').property('id', 'John').property('age', 25).property('likes', 'pizza').property('city', 'NY')
+g.addV('person').property('id', 'Alan').property('age', 22).property('likes', 'seafood').property('city', 'NY')
+g.addV('company').property('id', 'Acme').property('founded', '2001').property('city', 'NY')
+
+// Create edges
+g.V().has('id', 'John').addE('worksAt').property('weekends', true).to(g.V().has('id', 'Acme'))
+g.V().has('id', 'Alan').addE('worksAt').to(g.V().has('id', 'Acme'))
+g.V().has('id', 'Alan').addE('manages').to(g.V().has('id', 'John'))
+
+// Who works at Acme (i.e.; which vertices have worksAt edges pointing to Acme)?
+g.V('id', 'Acme').in('worksAt')
+
+// Where does Alan work (i.e.; which vertices have worksAt edges pointed to by Alan)?
+g.V('id', 'Alan').out('worksAt')
+
+// What are all of Alan's outgoing relationships (i.e; which vertices have any edges pointed to by Alan)?
+g.V('id', 'Alan').out()

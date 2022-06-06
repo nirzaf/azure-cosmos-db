@@ -1,0 +1,94 @@
+﻿---------------------
+-- Spatial Queries --
+---------------------
+
+-- Families container
+
+SELECT
+ c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state AS family,
+ c.geo
+FROM c
+
+SELECT
+ c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state AS family,
+ ST_DISTANCE(c.geo, 
+  {
+   'type': 'Point',
+   'coordinates': [-73.992, 40.73104]
+  }
+ ) AS MetersFromNyc
+FROM c
+
+SELECT
+ c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state AS family,
+ ST_DISTANCE(c.geo,
+  {
+   'type': 'Point',
+   'coordinates': [-73.992, 40.73104]
+  }
+ ) / 1000 AS KmFromNyc
+FROM c
+
+SELECT
+ c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state AS family,
+ ST_DISTANCE(c.geo,
+  {
+   'type': 'Point',
+   'coordinates': [-73.992, 40.73104]
+  }
+ ) / 1000 * .62137119
+ AS MilesFromNyc
+FROM c
+
+SELECT VALUE
+ c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state
+FROM c
+WHERE
+ ST_DISTANCE(c.geo,
+  {
+   'type': 'Point',
+   'coordinates':
+     [-73.992, 40.73104]
+  }
+ ) / 1000 * .62137119 <= 8
+
+-- Get families in Manhattan
+SELECT VALUE c.id || ', ' || c.location.city || ' (' || c.location.county || '), ' || c.location.state FROM c
+WHERE
+ ST_INTERSECTS(c.geo, {
+   'type': 'Polygon',
+   'coordinates': [ [
+     [ -74.01326, 40.7003  ], [ -73.99884, 40.70875 ], [ -73.97893, 40.71129 ], [ -73.97121, 40.72697 ],
+     [ -73.97387, 40.73477 ], [ -73.97142, 40.74401 ], [ -73.94205, 40.77606 ], [ -73.94414, 40.78217 ],
+     [ -73.9396 , 40.78535 ], [ -73.93622, 40.79111 ], [ -73.92938, 40.79567 ], [ -73.92905, 40.80088 ],
+     [ -73.93481, 40.80926 ], [ -73.934  , 40.81644 ], [ -73.93531, 40.83477 ], [ -73.92764, 40.84868 ],
+     [ -73.92286, 40.85595 ], [ -73.91137, 40.86855 ], [ -73.91035, 40.87121 ], [ -73.91198, 40.87332 ],
+     [ -73.91451, 40.87431 ], [ -73.92838, 40.86712 ], [ -73.9337 , 40.85868 ], [ -73.94451, 40.84999 ],
+     [ -73.94494, 40.84232 ], [ -74.00786, 40.75435 ], [ -74.01069, 40.72892 ], [ -74.0185 , 40.70381 ],
+     [ -74.01326, 40.7003  ]
+   ] ]
+  }) = true
+
+SELECT
+ ST_ISVALID(
+  {
+   'type': 'Point',
+   'coordinates': [-122.3295, 47.60357]
+  }
+ ) AS IsValidSpatial
+
+SELECT
+ ST_ISVALID(
+  {
+   'type': 'Point',
+   'coordinates': [47.60357, -122.3295]
+  }
+ ) AS IsValidSpatial
+
+SELECT
+ ST_ISVALIDDETAILED(
+  {
+   'type': 'Point',
+   'coordinates': [47.60357, -122.3295]
+  }
+ ) AS IsValidSpatial

@@ -1,0 +1,18 @@
+{
+    "familyName": "Smith",
+    "address": {
+        "addressLine": "123 Main Street",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601"
+    },
+    "parents": [
+        "Peter",
+        "Alice"
+    ],
+    "kids": [
+        "Adam",
+        "Jacqueline",
+        "Joshua"
+    ]
+}

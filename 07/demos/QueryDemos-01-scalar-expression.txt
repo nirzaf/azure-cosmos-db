@@ -1,0 +1,40 @@
+﻿-------------------------------
+-- Scalar Expression Queries --
+-------------------------------
+
+-- Basic expressions
+
+SELECT "Hello"
+
+SELECT "Hello" AS word
+
+SELECT VALUE "Hello"
+
+SELECT "Hello", "World"
+
+SELECT
+ "Hello" AS word1,
+ "World" AS word2
+
+-- Shaping nested arrays and embedded objects
+
+SELECT
+[
+  "Hello",
+  "World"
+]
+ AS words
+
+SELECT
+{
+  "word1": "Hello",
+  "word2": "World"
+}
+ AS words
+
+SELECT
+{
+  "words1": ["Hello", "World"],
+  "words2": ["How", "Are", "You?"]
+}
+ AS allWords

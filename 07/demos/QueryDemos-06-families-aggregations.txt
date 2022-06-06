@@ -1,0 +1,74 @@
+﻿------------------------------------
+-- Aggregate functions (families) --
+------------------------------------
+
+-- Total families
+SELECT VALUE COUNT(c)
+FROM c
+
+-- Lowest grade
+SELECT VALUE MIN(ch.grade)
+FROM ch IN c.children
+
+-- Highest grade
+SELECT VALUE MAX(ch.grade)
+FROM ch IN c.children
+
+-- Average grade
+SELECT VALUE AVG(ch.grade)
+FROM ch IN c.children
+
+-- Fewest children
+SELECT VALUE MIN(ARRAY_LENGTH(c.children))
+FROM c
+
+-- Most children
+SELECT VALUE MAX(ARRAY_LENGTH(c.children))
+FROM c
+
+-- Total children
+SELECT VALUE SUM(ARRAY_LENGTH(c.children))
+FROM c
+
+-- Total pets
+SELECT VALUE SUM(ARRAY_LENGTH(ch.pets))
+FROM ch IN c.children
+
+-- Aggregates for NY children
+SELECT
+ COUNT(ch) AS NyKidsCount,
+ MIN(ch.grade) AS NyMinGrade,
+ MAX(ch.grade) AS NyMaxGrade,
+ SUM(ARRAY_LENGTH(ch.pets)) AS NyPetsCount
+FROM c JOIN ch IN c.children
+WHERE c.location.state = 'NY'
+
+-- ...double-check
+SELECT
+ c.id,
+ ch.givenName ?? ch.firstName,
+ ch.grade,
+ ARRAY_LENGTH(ch.pets) AS pets
+FROM c JOIN ch IN c.children
+WHERE c.location.state = 'NY'
+
+-- Aggregates for all children
+
+SELECT
+ c.id,
+ ch.givenName ?? ch.firstName,
+ ch.grade,
+ ARRAY_LENGTH(ch.pets) AS pets
+FROM c JOIN ch IN c.children
+
+SELECT VALUE COUNT(ch)
+FROM c JOIN ch IN c.children
+
+SELECT VALUE MIN(ch.grade)
+FROM c JOIN ch IN c.children
+
+SELECT VALUE MAX(ch.grade)
+FROM c JOIN ch IN c.children
+
+SELECT VALUE SUM(ARRAY_LENGTH(ch.pets))
+FROM c JOIN ch IN c.children

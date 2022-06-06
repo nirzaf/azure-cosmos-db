@@ -1,0 +1,135 @@
+﻿-----------------------
+-- mystore Container --
+-----------------------
+
+-- Get all documents
+SELECT * FROM c
+
+-- Get all names and IDs
+SELECT c.id, c.name
+FROM c
+
+-- Get all names
+SELECT c.name
+FROM c
+
+-- Get all names as a flat string array
+SELECT VALUE c.name
+FROM c
+
+-- String concatenation
+SELECT VALUE c.name || ', ' || c.address.countryRegionName
+FROM c
+
+-- Projections
+SELECT
+  c.address.countryRegionName AS country,
+  {
+    "storeName": c.name,
+    "cityStateZip": [
+        c.address.location.city,
+        c.address.location.stateProvinceName
+    ],
+    "metadata": {
+        "internalId": c.id,
+        "timestamp": c._ts
+    }
+  } AS storeInfo
+FROM c
+
+-- Range queries
+SELECT VALUE c.name
+FROM c
+WHERE c.name >= 'A' AND c.name <= 'K'
+
+SELECT VALUE c.name
+FROM c
+WHERE c.name BETWEEN 'A' AND 'K'
+
+SELECT VALUE c.name
+FROM c
+WHERE c.name BETWEEN 'L' AND 'Z'
+
+-- Sort using ORDER BY
+SELECT c.id, c.name
+FROM c
+ORDER BY c.name
+
+SELECT c.id, c.name
+FROM c
+ORDER BY c.name DESC
+
+-- Limit results with TOP
+SELECT TOP 10 VALUE c.name
+FROM c
+WHERE c.address.countryRegionName = 'United States'
+ORDER BY c.name
+
+-- Paged results with OFFSET...LIMIT 
+SELECT VALUE c.name
+FROM c
+WHERE c.address.countryRegionName = 'United States'
+ORDER BY c.name
+OFFSET 0 LIMIT 10
+
+SELECT VALUE c.name
+FROM c
+WHERE c.address.countryRegionName = 'United States'
+ORDER BY c.name
+OFFSET 10 LIMIT 10
+
+-- Flatten results
+SELECT
+ c.id,
+ c.name,
+ c.address.location.city,
+ c.address.countryRegionName
+FROM c
+
+-- Get all city and state names
+SELECT
+ c.address.location.city,
+ c.address.location.stateProvinceName
+FROM c
+
+-- Simpler by reducing subset
+SELECT *
+FROM c.address.location
+
+-- Can't filter on subset without an alias
+SELECT *
+FROM c.address.location
+WHERE c.address.location.stateProvinceName = 'Florida'
+
+-- Alias the subset to filter within the subset
+SELECT *
+FROM c.address.location AS l
+WHERE l.stateProvinceName IN ('Florida', 'Illinois')
+
+-- Boolean expression property (on = comparison)
+SELECT
+ c.name,
+ c.address.location.city,
+ c.address.location.stateProvinceName,
+ c.address.location.city = c.address.location.stateProvinceName AS isSameCityState
+FROM c
+
+-- Ternary (?) operator
+
+SELECT
+ c.name,
+ c.address.countryRegionName AS region,
+ (c.address.countryRegionName = "United States" ? "USD" : "CAD" ) AS currency
+FROM c
+WHERE c.address.countryRegionName IN ("United States", "Canada")
+
+-- Nested ternary (?) operator
+
+SELECT
+ c.name,
+ c.address.countryRegionName AS region,
+ (c.address.countryRegionName = "United States" ? "USD" :
+  (c.address.countryRegionName = "Canada" ? "CAD" :
+   "EUR")) AS currency
+FROM c
+WHERE c.address.countryRegionName IN ("United States", "Canada", "France")

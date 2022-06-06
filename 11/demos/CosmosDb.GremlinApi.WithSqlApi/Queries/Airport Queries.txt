@@ -1,0 +1,65 @@
+﻿// Terminal 1
+g.addV('terminal').property('id', 't1').property('name','Terminal 1')
+
+// Gates 1 - 3
+g.addV('gate').property('id', 'g1').property('airline', 'Continental Breakfast Airlines').property('name', 'Gate 1')
+g.addV('gate').property('id', 'g2').property('airline', 'Continental Breakfast Airlines').property('name', 'Gate 2')
+g.addV('gate').property('id', 'g3').property('airline', 'Continental Breakfast Airlines').property('name', 'Gate 3')
+
+// Restaurants 1 - 3
+g.addV('restaurant').property('id', 'r1').property('name', 'Wendys').property('rating', 0.4).property('averagePrice', 9.50)
+g.addV('restaurant').property('id', 'r2').property('name', 'McDonalds').property('rating', 0.3).property('averagePrice', 8.15)
+g.addV('restaurant').property('id', 'r3').property('name', 'Chipotle').property('rating', 0.6).property('averagePrice', 12.50)
+
+// Restaurants 1 - 3
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'g1')).property('distanceInMinutes', 3)
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'g2')).property('distanceInMinutes', 5)
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'g3')).property('distanceInMinutes', 7)
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'r1')).property('distanceInMinutes', 5)
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'r2')).property('distanceInMinutes', 7)
+g.V().has('id', 't1').addE('toGate').to(g.V().has('id', 'r3')).property('distanceInMinutes', 10)
+
+g.V().has('id', 'g1').addE('toNextGate').to(g.V().has('id', 'g2')).property('distanceInMinutes', 2)
+g.V().has('id', 'g2').addE('toPreviousGate').to(g.V().has('id', 'g1')).property('distanceInMinutes', 2)
+g.V().has('id', 'g2').addE('toNextGate').to(g.V().has('id', 'g3')).property('distanceInMinutes', 2)
+g.V().has('id', 'g3').addE('toPreviousGate').to(g.V().has('id', 'g2')).property('distanceInMinutes', 2)
+
+g.V().has('id', 'g1').addE('toRestaurant').to(g.V().has('id', 'r1')).property('distanceInMinutes', 2)
+g.V().has('id', 'g1').addE('toRestaurant').to(g.V().has('id', 'r2')).property('distanceInMinutes', 4)
+g.V().has('id', 'g1').addE('toRestaurant').to(g.V().has('id', 'r3')).property('distanceInMinutes', 6)
+g.V().has('id', 'g2').addE('toRestaurant').to(g.V().has('id', 'r1')).property('distanceInMinutes', 2)
+g.V().has('id', 'g2').addE('toRestaurant').to(g.V().has('id', 'r2')).property('distanceInMinutes', 4)
+g.V().has('id', 'g2').addE('toRestaurant').to(g.V().has('id', 'r3')).property('distanceInMinutes', 6)
+g.V().has('id', 'g3').addE('toRestaurant').to(g.V().has('id', 'r1')).property('distanceInMinutes', 6)
+g.V().has('id', 'g3').addE('toRestaurant').to(g.V().has('id', 'r2')).property('distanceInMinutes', 4)
+g.V().has('id', 'g3').addE('toRestaurant').to(g.V().has('id', 'r3')).property('distanceInMinutes', 2)
+
+g.addV('terminal').property('id', 't2').property('name','Terminal 2')
+
+g.addV('gate').property('id', 'g4').property('airline', 'Seattle Airlines').property('name', 'Gate 4')
+g.addV('gate').property('id', 'g5').property('airline', 'Seattle Airlines').property('name', 'Gate 5')
+g.addV('gate').property('id', 'g6').property('airline', 'Seattle Airlines').property('name', 'Gate 6')
+g.addV('restaurant').property('id', 'r4').property('name', 'Jack in the Box').property('rating', 0.2).property('averagePrice', 3.15)
+g.addV('restaurant').property('id', 'r5').property('name', 'Smith and Wollensky').property('rating', 0.9).property('averagePrice', 95.25)
+g.addV('restaurant').property('id', 'r6').property('name', 'Burger King').property('rating', 0.2).property('averagePrice', 7.15)
+
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'g4')).property('distanceInMinutes', 3)
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'g5')).property('distanceInMinutes', 5)
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'g6')).property('distanceInMinutes', 7)
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'r4')).property('distanceInMinutes', 5)
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'r5')).property('distanceInMinutes', 7)
+g.V().has('id', 't2').addE('toGate').to(g.V().has('id', 'r6')).property('distanceInMinutes', 10)
+
+g.V().has('id', 'g4').addE('toNextGate').to(g.V().has('id', 'g5')).property('distanceInMinutes', 2)
+g.V().has('id', 'g5').addE('toPreviousGate').to(g.V().has('id', 'g4')).property('distanceInMinutes', 2)
+g.V().has('id', 'g5').addE('toNextGate').to(g.V().has('id', 'g6')).property('distanceInMinutes', 2)
+g.V().has('id', 'g6').addE('toPreviousGate').to(g.V().has('id', 'g5')).property('distanceInMinutes', 2)
+
+g.V().has('id', 'g4').addE('toRestaurant').to(g.V().has('id', 'r4')).property('distanceInMinutes', 2)
+g.V().has('id', 'g5').addE('toRestaurant').to(g.V().has('id', 'r5')).property('distanceInMinutes', 2)
+g.V().has('id', 'g6').addE('toRestaurant').to(g.V().has('id', 'r6')).property('distanceInMinutes', 2)
+
+g.V().has('id', 't1').addE('toNextTerminal').to(g.V().has('id', 't2')).property('distanceInMinutes', 10)
+g.V().has('id', 't2').addE('toPreviousTerminal').to(g.V().has('id', 't1')).property('distanceInMinutes', 10)
+
+g.V('g1').until(has('id','g2')).repeat(out()).path().by('id')

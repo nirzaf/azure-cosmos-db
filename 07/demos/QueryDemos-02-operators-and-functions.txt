@@ -1,0 +1,114 @@
+﻿--------------------------------------------
+-- Query Operators and Built-in Functions --
+--------------------------------------------
+
+-- Arithmetic operators
+
+SELECT
+ 8 * ((2 + 16) - 2) / 2 AS math1,
+ 8 * ((2 + 16) - 2) / 2.1 AS math2
+
+-- Logical operators
+
+SELECT
+ ("hot" = "cold" AND "up" = "down" OR 1 = 1) AS logical1,
+ ("hot" = "cold" AND ("up" = "down" OR 1 = 1) ) AS logical2
+
+-- Comparison, ternary, and ternary coalesce operators
+
+SELECT
+ (2 > 3 ? "higher" : "lower or equal") AS ternary
+
+SELECT
+ (undefined ?? undefined ?? "third") AS coalesce1,
+ (undefined ?? "second" ?? "third") AS coalesce2,
+ ("first" ?? undefined ?? "third") AS coalesce3
+     
+-- String concatenation operator
+
+SELECT
+ "Hello" || " " || "World" AS stringConcat
+
+-- Math functions
+
+SELECT
+ ROUND(3.4) AS mathRound1,		ROUND(3.5) AS mathRound2,
+ CEILING(3.4) AS mathCeiling1,	CEILING(3.5) AS mathCeiling2,
+ FLOOR(3.4) AS mathFloor1,		FLOOR(3.5) AS mathFloor2,
+ ABS(-5) AS mathAbs1,			ABS(5) AS mathAbs2,
+ SIN(28) AS mathSin,
+ COS(28) AS mathCos,
+ TAN(28) AS mathTan,
+ LOG(16) AS mathLog,
+ PI() AS mathPi
+
+-- Type checking
+
+SELECT
+ IS_ARRAY(6) AS isArray1,		IS_ARRAY([6]) AS isArray2,
+ IS_BOOL(6) AS isBool1,			IS_BOOL(false) AS isBool2,
+ IS_NULL(6) AS isNull1,			IS_NULL(null) AS isNull2,
+ IS_OBJECT("hello") AS IsObj1,	IS_OBJECT({"word": "hello"}) AS isObj2
+
+-- String
+
+SELECT
+ CONCAT("A", "b", "c", "d")	AS strConcat,       CONTAINS("Abcdef", "cde")	AS strContains,
+ STARTSWITH("Abcdef", "Ab")	AS strStartsWith,   ENDSWITH("Abcdef", "cdef")	AS strEndsWith,
+ INDEX_OF("Abcdef", "de")	AS strIndexOf1,     INDEX_OF("Abcdef", "df")	AS strIndexOf2,
+ LEFT("Abcdef", 3)			AS strLeft,         RIGHT("Abcdef", 3)			AS strRight,
+ SUBSTRING("Abcdef", 2, 3)	AS strSubstring,    LENGTH("Abcdef")			AS strLength,
+ LOWER("Abcdef")			AS strLower,        UPPER("Abcdef")			    AS strUpper
+
+SELECT 
+    StringToArray('[]') AS a1, 
+    StringToArray("[1,2,3]") AS a2,
+    StringToArray("[\"str\",2,3]") AS a3,
+    StringToArray('[["5","6","7"],["8"],["9"]]') AS a4,
+    StringToArray('[1,2,3, "[4,5,6]",[7,8]]') AS a5
+
+SELECT 
+    StringToBoolean("true") AS b1, 
+    StringToBoolean("    false") AS b2,
+    StringToBoolean("false    ") AS b3
+
+SELECT 
+    StringToNull("null") AS n1, 
+    StringToNull("  null ") AS n2,
+    IS_NULL(StringToNull("null   ")) AS n3
+
+SELECT 
+    StringToNumber("1.000000") AS num1, 
+    StringToNumber("3.14") AS num2,
+    StringToNumber("   60   ") AS num3, 
+    StringToNumber("-1.79769e+308") AS num4
+
+SELECT 
+    StringToObject("{}") AS obj1, 
+    StringToObject('{"A":[1,2,3]}') AS obj2,
+    StringToObject('{"B":[{"b1":[5,6,7]},{"b2":8},{"b3":9}]}') AS obj3, 
+    StringToObject("{\"C\":[{\"c1\":[5,6,7]},{\"c2\":8},{\"c3\":9}]}") AS obj4
+    
+SELECT 
+    ToString(1.0000) AS str1, 
+    ToString("Hello World") AS str2, 
+    ToString(NaN) AS str3, 
+    ToString(Infinity) AS str4,
+    ToString(IS_STRING(ToString(undefined))) AS str5, 
+    ToString(0.1234) AS str6, 
+    ToString(false) AS str7, 
+    ToString(undefined) AS str8
+    
+-- Date/Time
+
+SELECT
+    GETCURRENTDATETIME() AS currentUtcDateTime,
+    GETCURRENTTIMESTAMP () AS currentUtcTimestamp
+
+-- Array
+
+SELECT
+ ARRAY_CONCAT(["A", "B"], ["1", "2"], ["#"])	AS arrConcat,
+ ARRAY_CONTAINS(["1A", "1B", "1C"], "1B")		AS arrContains,
+ ARRAY_LENGTH(["1A", "1B", "1C"])				AS arrLength,
+ ARRAY_SLICE(["1A", "1B", "1C", "1D"], 1, 2)	AS arrSlice

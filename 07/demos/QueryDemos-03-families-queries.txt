@@ -1,0 +1,86 @@
+﻿------------------------
+-- Families Container --
+------------------------
+
+-- FROM clause
+
+-- Can just use 'c' for container
+SELECT * FROM c
+
+-- Get city and state
+SELECT
+ c.location.city,
+ c.location.state
+FROM c
+
+-- Can use container name
+SELECT
+ Families.location.city,
+ Families.location.state
+FROM Families
+
+-- Can "double"-alias
+SELECT
+ f.location.city,
+ f.location.state
+FROM Families AS f
+
+-- Reduce source to subset of children (per family)
+SELECT *
+FROM c.children
+ 
+-- With reduced source, can't query outside the subset
+SELECT *
+FROM c.children
+WHERE c.location.state = 'NY'
+  
+-- All queryable properties need to be in scope
+SELECT c.children
+FROM c
+WHERE c.location.state = 'NY'
+
+-- FROM with IN (flatten documents)
+SELECT *
+FROM ch IN c.children
+
+SELECT
+ ch.givenName ?? ch.firstName AS childName,
+ ch.grade,
+ ARRAY_LENGTH(ch.pets) ?? 0 AS numberOfPets,
+ ch.pets
+FROM
+ ch IN c.children
+
+-- FROM with JOIN
+
+-- Duplicate parent-level info for each child
+SELECT
+ f.id,
+ f.location.city,
+ f.location.state,
+ ch.givenName ?? ch.firstName AS childName,
+ ARRAY_LENGTH(ch.pets) ?? 0 AS numberOfPets,
+ ch.pets
+FROM c AS f
+JOIN ch IN f.children
+
+-- Double JOIN to flatten children and pets
+SELECT
+ f.id,
+ ch.givenName ?? ch.firstName AS childName,
+ p.givenName AS petName,
+ p.type
+FROM c AS f
+JOIN ch IN f.children
+JOIN p IN ch.pets
+
+-- Flatten to string array of pet names using VALUE
+SELECT p.givenName 
+FROM c AS f
+JOIN ch IN f.children 
+JOIN p IN ch.pets
+
+SELECT VALUE p.givenName 
+FROM c AS f
+JOIN ch IN f.children 
+JOIN p IN ch.pets

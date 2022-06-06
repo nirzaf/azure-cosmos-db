@@ -1,0 +1,41 @@
+{
+	"id": "SmithFamily",
+	"parents": [
+		{
+			"familyName": "Smith",
+			"givenName": "James"
+		},
+		{
+			"familyName": "Curtis",
+			"givenName": "Helen"
+		}
+	],
+	"children": [
+		{
+			"givenName": "Michelle",
+			"gender": "female",
+			"grade": 1
+		},
+		{
+			"givenName": "John",
+			"gender": "male",
+			"grade": 7,
+			"pets": [
+				{
+					"givenName": "Tweetie",
+					"type": "Bird"
+				}
+			]
+		}
+	],
+	"location": {
+		"state": "NY",
+		"county": "Queens",
+		"city": "Forest Hills"
+	},
+	"geo": {
+		"type": "Point",
+		"coordinates": [ -73.84791, 40.72266 ]
+	},
+	"isRegistered": true
+}

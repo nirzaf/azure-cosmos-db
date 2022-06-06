@@ -1,0 +1,19 @@
+{
+    "familyName": "Jones",
+    "address": {
+        "addressLine": "456 Harbor Boulevard",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60603"
+    },
+    "parents": [
+        "David",
+        "Diana"
+    ],
+    "kids": [
+        "Evan"
+    ],
+    "pets": [
+        "Lint"
+    ]
+}

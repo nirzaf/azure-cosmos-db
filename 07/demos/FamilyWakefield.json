@@ -1,0 +1,57 @@
+{
+	"id": "WakefieldFamily",
+	"parents": [
+		{
+			"familyName": "Wakefield",
+			"givenName": "Robin"
+		},
+		{
+			"familyName": "Miller",
+			"givenName": "Ben"
+		}
+	],
+	"children": [
+		{
+			"familyName": "Merriam",
+			"givenName": "Jesse",
+			"gender": "female",
+			"grade": 6,
+			"pets": [
+				{
+					"givenName": "Charlie Brown",
+					"type": "Dog"
+				},
+				{
+					"givenName": "Tiger",
+					"type": "Cat"
+				},
+				{
+					"givenName": "Princess",
+					"type": "Cat"
+				}
+			]
+		},
+		{
+			"familyName": "Miller",
+			"givenName": "Lisa",
+			"gender": "female",
+			"grade": 3,
+			"pets": [
+				{
+					"givenName": "Jake",
+					"type": "Snake"
+				}
+			]
+		}
+	],
+	"location": {
+		"state": "NY",
+		"county": "Manhattan",
+		"city": "NY"
+	},
+	"geo": {
+		"type": "Point",
+		"coordinates": [ -73.992, 40.73103 ]
+	},
+	"isRegistered": false
+}

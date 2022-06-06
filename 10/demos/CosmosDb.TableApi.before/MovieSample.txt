@@ -1,0 +1,3 @@
+﻿PartitionKey   RowKey         Year   Length    Description
+sci-fi         Star Trek II   1982   1h, 53m   Khan is back!
+

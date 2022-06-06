@@ -1,0 +1,27 @@
+﻿g.V()
+g.V().has('name', 'IRON MAN').out().as('comics').in().has('name', 'THOR').select('comics').order().by('name')
+
+-- All documents
+SELECT * FROM c
+
+-- All documents (1532)
+SELECT VALUE COUNT(c) FROM c
+
+-- All comic vertices (98)
+SELECT VALUE COUNT(c) FROM c
+WHERE c.label = 'comic'
+
+-- All hero vertices (42)
+SELECT VALUE COUNT(c) FROM c
+WHERE c.label = 'hero'
+
+-- All seenIn edges (1350)
+SELECT VALUE COUNT(c) FROM c
+WHERE c.label = 'seenIn'
+
+-- That's 1490 altogether... what about the other 42?
+
+-- All icon documents (42)
+SELECT VALUE COUNT(c) FROM c
+WHERE c.label = 'icon'
+
